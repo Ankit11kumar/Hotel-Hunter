@@ -1,26 +1,23 @@
 import { useEffect, useState } from "react";
 import useDebounce from "../../Hooks/useDebounce";
-import { fetchData } from "../../Redux/actions/searchAction";
-import { AppDispatch, useAppDispatch } from "../..";
 import "./searchBar.scss";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import { useAppDispatch } from "../../Redux/store";
+import { fetchSearchedData } from "../../Redux/hotelsAndPlaces/actionCreators";
 
 const SearchBar = () => {
   const [searchValue, setSearchValue] = useState("");
   const debouncedSearchValue = useDebounce(searchValue, 1000);
-  const dispatch: AppDispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const handleChange = (e: { target: { value: string } }) => {
     const val = e.target.value;
     setSearchValue(val);
   };
 
-  const fetchHotelData = async (debouncedSearchValue: string) => {
-    await dispatch(fetchData(debouncedSearchValue));
-  };
-
   useEffect(() => {
-    fetchHotelData(debouncedSearchValue);
+    if(debouncedSearchValue)
+      dispatch(fetchSearchedData(debouncedSearchValue));
   }, [debouncedSearchValue]);
 
   return (

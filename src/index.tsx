@@ -1,29 +1,34 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { Provider, useDispatch } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
-import rootReducer from "./Redux/reducers/rootReducer";
-import App from "./App";
+import { Provider } from "react-redux";
+import App from "./App/App";
 import reportWebVitals from "./reportWebVitals";
+import { initStore } from "./Redux/store";
+import { BrowserRouter } from "react-router-dom";
 
-const store = configureStore({
-  reducer: rootReducer,
-});
+interface Window extends globalThis.Window {
+  __PRELOADED_STATE__?: any;
+}
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
-root.render(
+const preloadedState = (window as Window).__PRELOADED_STATE__;
+delete (window as Window).__PRELOADED_STATE__;
+
+const store = initStore(preloadedState);
+
+const rootJSX = (
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>
 );
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
-export const useAppDispatch = () => useDispatch<AppDispatch>()
+
+const root = document.getElementById("root") as HTMLElement;
+ReactDOM.createRoot(root).render(rootJSX)
+// ReactDOM.hydrateRoot(root, rootJSX);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

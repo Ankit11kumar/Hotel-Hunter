@@ -1,8 +1,8 @@
-const renderTitleWithHighlight = (title: string, matches: any[]) => {
+export const renderTitleWithHighlight = (title: string, matches: any[]) : JSX.Element[] => {
   let highlightedTitle = [];
   let lastIndex = 0;
   matches?.forEach((match) => {
-    highlightedTitle.push(title.substring(lastIndex, match.offset));
+    highlightedTitle.push(<>{title.substring(lastIndex, match.offset)}</>);
     highlightedTitle.push(
       <span className="highlight">
         {title.substring(match.offset, match.offset + match.length)}
@@ -10,8 +10,7 @@ const renderTitleWithHighlight = (title: string, matches: any[]) => {
     );
     lastIndex = match.offset + match.length;
   });
-  highlightedTitle.push(title.substring(lastIndex));
-  return <>{highlightedTitle}</>;
+  highlightedTitle.push(<>{title.substring(lastIndex)}</>);
+  return highlightedTitle;
 };
 
-export default renderTitleWithHighlight;
