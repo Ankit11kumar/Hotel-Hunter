@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchSearchedData } from "./actionCreators";
+import { fetchSearchedData, fetchSearchDetails } from "./actionCreators";
 import { SearchDataState } from "../../Interfaces/hotelsAndPlaces.interface";
 
-const initialState: SearchDataState = {
+export const initialState: SearchDataState = {
   data: { hotels: [], locations: [] },
   loading: false,
   error: null,
@@ -24,6 +24,19 @@ const hotelsAndPlacesSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchSearchedData.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(fetchSearchDetails.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchSearchDetails.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload;
+        state.error = null;
+      })
+      .addCase(fetchSearchDetails.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });

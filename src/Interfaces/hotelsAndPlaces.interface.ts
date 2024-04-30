@@ -23,5 +23,6 @@ export interface SearchDataState {
 export interface SearchResultsProps {
   heading: string;
   data: SearchObj[];
+  type: string;
   icon: JSX.Element;
 }

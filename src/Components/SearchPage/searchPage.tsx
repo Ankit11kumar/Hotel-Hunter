@@ -22,6 +22,7 @@ const SearchPage = () => {
             <SearchResults
               heading="Locations"
               data={data?.locations}
+              type="places"
               icon={<FaMapMarkerAlt className="listIcon" />}
             />
           )}
@@ -29,6 +30,7 @@ const SearchPage = () => {
             <SearchResults
               heading="Hotels"
               data={data?.hotels}
+              type="hotel"
               icon={<LiaHotelSolid className="listIcon" />}
             />
           )}

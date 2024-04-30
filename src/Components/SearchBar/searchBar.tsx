@@ -22,7 +22,7 @@ const SearchBar = () => {
 
   return (
     <div>
-      <FaMapMarkerAlt className="locationIcon" />
+      {/* <FaMapMarkerAlt className="locationIcon" /> */}
       <input
         className="searchBar"
         type="text"
