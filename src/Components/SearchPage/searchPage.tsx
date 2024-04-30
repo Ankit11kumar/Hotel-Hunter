@@ -13,12 +13,12 @@ const SearchPage = () => {
     error,
   } = useAppSelector((state) => state.hotelsAndPlaces);
 
-  return (
-    <div className="search">
-      <SearchBar />
-      {loading ? (
-        <PuffLoader color="#36d7b7" />
-      ) : (
+  const renderSearchResults = () => {
+    if (loading)
+      return <PuffLoader color="#36d7b7" />
+    if (error) return <div className="error">{error}</div>;
+    if (data?.locations?.length || data?.hotels?.length)
+      return (
         <div className="searchResults">
           {!!data?.locations?.length && (
             <SearchResults
@@ -37,7 +37,13 @@ const SearchPage = () => {
             />
           )}
         </div>
-      )}
+      );
+  };
+
+  return (
+    <div className="search">
+      <SearchBar />
+      {renderSearchResults()}
     </div>
   );
 };

@@ -35,3 +35,13 @@ export interface SearchResultsProps {
   type: string;
   icon: JSX.Element;
 }
+
+export interface MatchedSubstrings {
+  length: number;
+  offset: number;
+}
+
+export interface StringWithHighlightProps{
+  string: string;
+  matches: MatchedSubstrings[]
+}
