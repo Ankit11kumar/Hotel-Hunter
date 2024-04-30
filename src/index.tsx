@@ -17,17 +17,15 @@ delete (window as Window).__PRELOADED_STATE__;
 const store = initStore(preloadedState);
 
 const rootJSX = (
-  <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </BrowserRouter>
-  </React.StrictMode>
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>
 );
 
 const root = document.getElementById("root") as HTMLElement;
-ReactDOM.createRoot(root).render(rootJSX)
+ReactDOM.createRoot(root).render(rootJSX);
 // ReactDOM.hydrateRoot(root, rootJSX);
 
 // If you want to start measuring performance in your app, pass a function
