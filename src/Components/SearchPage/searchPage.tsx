@@ -7,9 +7,11 @@ import { useAppSelector } from "../../Redux/store";
 import SearchResults from "../SearchResults/searchResults";
 
 const SearchPage = () => {
-  const { data, loading, error } = useAppSelector(
-    (state) => state.hotelsAndPlaces
-  );
+  const {
+    searchData: data,
+    loading,
+    error,
+  } = useAppSelector((state) => state.hotelsAndPlaces);
 
   return (
     <div className="search">

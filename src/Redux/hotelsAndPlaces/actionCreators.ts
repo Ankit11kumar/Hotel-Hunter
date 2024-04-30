@@ -21,11 +21,17 @@ export const fetchSearchedData = createAsyncThunk(
 
 export const fetchSearchDetails = createAsyncThunk(
   "hotelsAndPlaces/fetchSearchDetails",
-  async (type, id): Promise<any> => {
+  async ({
+    type,
+    id,
+  }: {
+    type: string | undefined;
+    id: string | undefined;
+  }): Promise<any> => {
     const response = await axios({
       method: "GET",
       url: `/${type}/${id}`,
     });
-    return response.data;
+    return response.data.data;
   }
 );

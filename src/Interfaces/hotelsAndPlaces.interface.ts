@@ -15,9 +15,18 @@ export interface SearchData {
 }
 
 export interface SearchDataState {
-  data: SearchData;
+  searchData: SearchData;
+  detailsData: Place | null;
   loading: boolean;
   error: string | null | undefined;
+}
+
+export interface Place {
+  id: number;
+  name: string;
+  description?: string;
+  title: string;
+  url?: string
 }
 
 export interface SearchResultsProps {

@@ -3,7 +3,8 @@ import { fetchSearchedData, fetchSearchDetails } from "./actionCreators";
 import { SearchDataState } from "../../Interfaces/hotelsAndPlaces.interface";
 
 export const initialState: SearchDataState = {
-  data: { hotels: [], locations: [] },
+  searchData: { hotels: [], locations: [] },
+  detailsData: null,
   loading: false,
   error: null,
 };
@@ -20,7 +21,7 @@ const hotelsAndPlacesSlice = createSlice({
       })
       .addCase(fetchSearchedData.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload;
+        state.searchData = action.payload;
         state.error = null;
       })
       .addCase(fetchSearchedData.rejected, (state, action) => {
@@ -33,7 +34,7 @@ const hotelsAndPlacesSlice = createSlice({
       })
       .addCase(fetchSearchDetails.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload;
+        state.detailsData = action.payload;
         state.error = null;
       })
       .addCase(fetchSearchDetails.rejected, (state, action) => {
